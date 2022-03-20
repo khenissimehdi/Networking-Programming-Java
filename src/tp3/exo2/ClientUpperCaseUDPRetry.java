@@ -1,19 +1,22 @@
-package tp3.exo1;
+package tp3.exo2;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.nio.ByteBuffer;
-import java.nio.channels.*;
+import java.nio.channels.AlreadyConnectedException;
+import java.nio.channels.DatagramChannel;
+import java.nio.channels.UnresolvedAddressException;
+import java.nio.channels.UnsupportedAddressTypeException;
 import java.nio.charset.Charset;
 import java.util.Scanner;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
-public class ClientUpperCaseUDPTimeout {
+public class ClientUpperCaseUDPRetry {
     public static final int BUFFER_SIZE = 1024;
-    public static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClientUpperCaseUDPTimeout.class.getName());
+    public static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClientUpperCaseUDPRetry.class.getName());
 
     private static void usage() {
         System.out.println("Usage : NetcatUDP host port charset");
@@ -97,8 +100,7 @@ public class ClientUpperCaseUDPTimeout {
 
                 msg = abq.poll(3, TimeUnit.SECONDS);
                 if (msg == null) {
-                    System.out.println("Server did not respond in time");
-                   // sendMessage(client, line, server, cs);
+                   sendMessage(client, line, server, cs);
                 } else {
                     System.out.println(msg);
                 }
