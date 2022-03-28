@@ -27,7 +27,7 @@ public class ClientIdUpperCaseUDPBurst {
         private final String outFilename;
         private final InetSocketAddress serverAddress;
         private final DatagramChannel dc;
-        private final AnswersLog answersLog;         // Thread-safe structure keeping track of missing responses
+        private final AnswersLog answersLog; // Thread-safe structure keeping track of missing responses
         private long requestId;
 
         public static void usage() {
